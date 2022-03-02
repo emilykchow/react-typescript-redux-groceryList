@@ -14,7 +14,7 @@ const DisplayList = ({list}: IGroceryProps) => {
     return (
         <div>
             <ul>
-                {list.length ? list.map((item, index) => {
+                {groceryStore.length ? groceryStore.map((item, index) => {
                     return(
                         <GroceryItem key={index} item={item}/>
                     )

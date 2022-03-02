@@ -15,10 +15,10 @@ interface IGroceryProps {
 
 const InputField = ({grocery, setGrocery, list, setList, id, setId}: IGroceryProps) => {
     const dispatch = useAppDispatch();
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>, grocery: IGroceryState) => {
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>, value: IGroceryState) => {
         e.preventDefault();
         setId(id+1);
-        setList([...list, grocery]);
+        setList([...list, value]);
         setGrocery("")
         dispatch(addGrocery(value));
         
@@ -33,4 +33,4 @@ const InputField = ({grocery, setGrocery, list, setList, id, setId}: IGroceryPro
   )
 }
 
-export default InputField
+export default InputField;
