@@ -1,13 +1,14 @@
 import React from 'react'
-import { IGroceryState } from '../App'
 import {addGrocery, editGrocery} from "../redux/grocerySlice";
 import { useAppDispatch } from '../redux/hooks';
 import { Button, InputGroup, FormControl } from 'react-bootstrap';
+import { incomingItem } from '../network/network';
+
 
 interface IGroceryProps {
-    grocery: IGroceryState;
+    grocery: incomingItem;
     setGrocery: Function;
-    list: IGroceryState[];
+    list: incomingItem[];
     setList: Function;
     id: number;
     setId: Function;
@@ -18,7 +19,7 @@ interface IGroceryProps {
 
 const InputField = ({grocery, setGrocery, list, setList, id, setId, edit, setEdit}: IGroceryProps) => {
     const dispatch = useAppDispatch();
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>, value: IGroceryState) => {
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>, value: incomingItem) => {
         e.preventDefault();
         
         if (!edit) {

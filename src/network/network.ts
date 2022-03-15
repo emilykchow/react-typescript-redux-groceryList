@@ -1,12 +1,17 @@
 export interface incomingItem {
-    userId: number,
-    id: number,
-    title: string,
-    completed: boolean
+    _id: string,
+    content: string,
+    done: boolean
 }
 
-export const fetchTodos = (): Promise<incomingItem[]> => {
-    return fetch("https://jsonplaceholder.typicode.com/todos")
+export interface incomingResponse {
+    response: incomingItem[]
+}
+
+const fetchBackEndURL = "http://localhost:6061"
+
+export const fetchTodos = (): Promise<incomingResponse> => {
+    return fetch (`${fetchBackEndURL}/todos`)
         .then(res => res.json())
-        .then(res => res as incomingItem[])
+        .then(res => res as incomingResponse)
 }
