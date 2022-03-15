@@ -1,0 +1,57 @@
+body {
+    background: #5ABC26 !important;
+    height: 100vh;
+    width: 100vw;
+}
+
+h1 {
+    text-align: center;
+    justify-content: center;
+    padding: 10px;
+}
+
+/* ------------------------------- Grocery Input ------------------------------- */
+.Input-field-wrapper {
+    margin: 20px;
+}
+
+/* ------------------------------- Grocery Item ------------------------------- */
+.grocery-item {
+    margin-top: 40px;
+    padding: 10px;
+    background-color: white;
+    height: 150px;
+    width: 90%;
+    border-radius: 30px;
+    /* position: absolute; */
+}
+
+.delete-btn {
+    border-radius: 50%;
+    background-color: red;
+    color: white;
+    height: 30px;
+    width: 30px;
+    position: absolute;
+    right: 10px;
+    border: none;
+}
+
+.edit-btn{
+    height: 30px;
+    width: 50px;
+    position: absolute;
+    right: 50px;
+    font-size: 15px !important;
+}
+
+/* ------------------------------- Grocery List Wrapper div ------------------------------- */
+.grocery-list {
+    /* background-color: rgb(219, 166, 166); */
+    width: 90vw;
+    height: 100vh;
+    margin: 50px;
+    position: relative;
+    display: flex;
+    
+}

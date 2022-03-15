@@ -1,7 +1,8 @@
 import React from 'react'
 import { IGroceryState } from '../App'
-import {addGrocery} from "../redux/grocerySlice";
+import {addGrocery, editGrocery} from "../redux/grocerySlice";
 import { useAppDispatch } from '../redux/hooks';
+import { Button, InputGroup, FormControl } from 'react-bootstrap';
 
 interface IGroceryProps {
     grocery: IGroceryState;
@@ -10,24 +11,34 @@ interface IGroceryProps {
     setList: Function;
     id: number;
     setId: Function;
+    edit: boolean,
+    setEdit: Function
 
 }
 
-const InputField = ({grocery, setGrocery, list, setList, id, setId}: IGroceryProps) => {
+const InputField = ({grocery, setGrocery, list, setList, id, setId, edit, setEdit}: IGroceryProps) => {
     const dispatch = useAppDispatch();
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>, value: IGroceryState) => {
         e.preventDefault();
-        setId(id+1);
-        setList([...list, value]);
-        setGrocery("")
-        dispatch(addGrocery(value));
         
+        if (!edit) {
+            setId(id+1);
+            setList([...list, value]);
+            setGrocery("");
+            console.log(value, "handleSubmit");
+            dispatch(addGrocery(value));
+        } else {
+            dispatch(editGrocery(value));
+        }
+ 
     }
   return (
-    <div>
+    <div className="Input-field-wrapper">
         <form onSubmit={(e) => handleSubmit(e, grocery)}>
-            <input value={grocery.content} onChange={(e) => setGrocery({id, content: e.target.value, done: false})}/>
-            <button type="submit">Submit</button>
+            <InputGroup>
+            <FormControl value={grocery.content} onChange={(e) => setGrocery({id, content: e.target.value, done: false})} as="textarea" aria-label="With textarea" />
+            <Button type="submit" variant="success" id="button-addon2">Submit</Button>
+        </InputGroup>
         </form>
     </div>
   )

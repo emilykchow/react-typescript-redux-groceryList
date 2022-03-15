@@ -1,14 +1,10 @@
 import React from 'react'
-import { IGroceryState } from '../App';
+import { incomingItem } from '../network/network';
 
-interface IGroceryProps {
-  item: IGroceryState
-}
-
-const GroceryItem = ({item}: IGroceryProps) => {
+const GroceryItem = ({item}: {item: incomingItem}) => {
   return (
     <div>
-      <div>{item.content}</div>
+      <div>{item.title}</div>
       <button>Done</button>
     </div>
   )
