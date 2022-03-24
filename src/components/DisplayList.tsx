@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
-import { removeGrocery, editGrocery, addMultipleGroceries } from '../redux/grocerySlice';
+import { removeGrocery, addMultipleGroceries } from '../redux/grocerySlice';
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import { Button, Card } from 'react-bootstrap';
-import { fetchItems, incomingItem, updateBackendPayload, deleteItem } from '../network/network';
+import { fetchItems, incomingItem, deleteItem } from '../network/network';
 
 
 interface IGroceryProps {
