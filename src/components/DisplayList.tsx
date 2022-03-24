@@ -1,34 +1,48 @@
 import React, { useEffect } from 'react'
 import { removeGrocery, editGrocery, addMultipleGroceries } from '../redux/grocerySlice';
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
-import { Button } from 'react-bootstrap';
-import { fetchTodos, incomingItem } from '../network/network';
+import { Button, Card } from 'react-bootstrap';
+import { fetchItems, incomingItem, updateBackendPayload, deleteItem } from '../network/network';
+
 
 interface IGroceryProps {
     list: incomingItem[];
+    setGrocery: Function;
+    setEdit: Function;
+    id: string,
+    setId: Function
 }
 
-const DisplayList = ({list}: IGroceryProps) => {
+const DisplayList = ({list, setGrocery, setEdit, id, setId}: IGroceryProps) => {
     const groceryStore = useAppSelector((state) => state.groceryReducer.value);
     const dispatch = useAppDispatch();
 
     useEffect(() => {
         if(!groceryStore.length) {
-            fetchTodos().then(res => {
+            fetchItems().then(res => {
                 console.log(res.response, "Backend response")
                 dispatch(addMultipleGroceries(res.response))
             })
         }
       }, [groceryStore, dispatch])
 
-    const handleDelete = (item: string) => {
-        dispatch(removeGrocery(item))
+    const handleDelete = (id: string) => {
+        const result = deleteItem(id)
+        result.then(res => {
+            if (res === 204) {
+                dispatch(removeGrocery(id))
+            }
+        })
     }
+
     const handleUpdate = (item: incomingItem) => {
-        dispatch(editGrocery(item))
+        setEdit(true)
+        setId(item._id)
+        setGrocery(item)
+        console.log(item)
     }
                     
-    console.log(groceryStore, "display grocery list")
+    // console.log(groceryStore, "display grocery list")
     
     return (
         <div className="grocery-list">
@@ -42,9 +56,11 @@ const DisplayList = ({list}: IGroceryProps) => {
                                 <Button className="edit-btn" onClick={() => handleUpdate(item)} variant="success">Edit</Button>
                             </div>
                             
-                            <div className="grocery-item">
-                                {item.content}
-                            </div>
+                            <Card className="grocery-item">
+                                <Card.Body>
+                                    {item.content}
+                                 </Card.Body>   
+                            </Card>
                         </div>
                     )
                 }) : null}
