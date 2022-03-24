@@ -1,6 +1,10 @@
-# Getting Started with Create React App
+# Grocery List Web App
+
+This project allows users to create, remove, update and delete grocery items that are now stored in a nodejs backend.
+It's a React project with Typescript that integrates with NodeJS backend and MongoDB for storage.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
 
 ## Available Scripts
 
