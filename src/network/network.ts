@@ -16,7 +16,7 @@ export interface updateBackendPayload {
     done?: boolean
 }
 
-const fetchBackEndURL = "http://localhost:6061"
+const fetchBackEndURL = "https://grocery-list-backend-001.herokuapp.com/"
 
 export const fetchItems = (): Promise<incomingResponses> => {
     return fetch (`${fetchBackEndURL}/items`)
