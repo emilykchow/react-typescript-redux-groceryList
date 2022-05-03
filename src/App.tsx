@@ -3,6 +3,7 @@ import './App.css';
 import DisplayList from './components/DisplayList';
 import InputField from './components/InputField';
 import { incomingItem } from './network/network';
+import CityListenersChart from './components/Dashboard.tsx/CityListenersChart';
 
 // export interface IGroceryState {
 //   id: number,
@@ -19,6 +20,7 @@ function App() {
   return (
     <div className="App">
       <h1>Grocery List</h1>
+      <CityListenersChart />
       <InputField grocery={grocery} setGrocery={setGrocery} list={list} setList={setList} id={id} setId={setId} edit={edit} setEdit={setEdit}/>
       <DisplayList setGrocery={setGrocery} list={list} setEdit={setEdit} id={id} setId={setId}/>
     </div>

@@ -36,7 +36,6 @@ export const postItem = async (payload: incomingItem): Promise<incomingResponse>
     })
         .then(res => res.json())
         .then(res => res as incomingResponse)
-
 }
 
 export const editItem = async (payload: updateBackendPayload, _id: string): Promise<incomingResponse> => {
@@ -64,3 +63,14 @@ export const deleteItem = async (_id: string): Promise<number> => {
     })
         .then(res => res.status)
 }
+
+
+
+
+// // Dashboard*********************************************************
+// const dashboardURL = "https://sandbox.api.soundcharts.com/api/v2/artist"
+
+// export const getArtist UUID = async (): Promise<> => {
+//     const result = await fetch(`{dashboardURL}search/${}`)
+// }
+
