@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 interface ICityListenerState {
-    value: Record<string, any>
+    artistDetails: Record<string, any>
 }
 
 const initialState: ICityListenerState = {
-  value: {},
+  artistDetails: {},
 }
 
 export const cityListenerSlice = createSlice({
@@ -13,7 +13,7 @@ export const cityListenerSlice = createSlice({
   initialState,
   reducers: {
     getArtistDetails: (state, action: PayloadAction<Record<string, any>>) => {
-        state.value = action.payload
+        state.artistDetails = action.payload
     },
   },
 })

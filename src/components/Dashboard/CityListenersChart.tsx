@@ -5,10 +5,9 @@ import { getArtistDetails } from '../../redux/CityListenerSlice';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 
 
-
 const CityListenersChart = () => {
   const dispatch = useAppDispatch()
-  const value = useAppSelector((state: any)  => state.cityListenerReducer.value)
+  const artistDetails = useAppSelector((state: any)  => state.cityListenerReducer.artistDetails)
   const data ={
   options: {
     chart: {
@@ -26,8 +25,16 @@ const CityListenersChart = () => {
   ]
 }
 
+const cleanData = (res: Record<string, any>[]) => {
+  let seriesData: string[] = []
+  // Get the first object
+  let firstObject = res[0].cityPlots
+  // Under cityplots get the first 12
+  let cleanedArrays = firstObject.slice(0, 11)
+  cleanedArrays.map((item: Record<string, any>) => seriesData.push(item.value))
+}
 useEffect(() => {
-  if (!Object.keys(value).length) {
+  if (!Object.keys(artistDetails).length) {
     const result = getArtistUUID('billie eillish')
     result.then(res => {
       if (res.items) {
@@ -36,14 +43,16 @@ useEffect(() => {
     })
   }
 
-  if (value.uuid) {
-    const monthlyListeners = getMonthlyListeners(value.uuid)
+  if (artistDetails.uuid) {
+    const monthlyListeners = getMonthlyListeners(artistDetails.uuid)
     monthlyListeners.then(res => {
-      console.log(res)
+      if (res.items) {
+        cleanData(res.items)
+      }
     })
   }
 
-}, [dispatch, value.uuid])
+}, [dispatch, artistDetails])
 
 
   return (

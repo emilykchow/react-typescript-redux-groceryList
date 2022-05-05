@@ -72,6 +72,13 @@ export interface getArtistData {
     page?: Record<string, any>[]
 }
 
+export interface getMonthlyListenersData {
+    errors: Record<string, any>[] | []
+    items?: Record<string, any>[]
+    page?: Record<string, any>
+    related?: Record<string, any>
+}
+
 const dashboardURL = "https://sandbox.api.soundcharts.com/api/v2/artist"
 
 export const getArtistUUID = async (name: string): Promise<getArtistData> => {
@@ -85,7 +92,7 @@ export const getArtistUUID = async (name: string): Promise<getArtistData> => {
     return result.json()
 }
 
-export const getMonthlyListeners = async (uuid: string): Promise<any> => {
+export const getMonthlyListeners = async (uuid: string): Promise<getMonthlyListenersData> => {
     const result = await fetch(`${dashboardURL}/${uuid}/streaming/spotify/listeners/2020/10`, {
         method: 'GET',
         headers: {
