@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
 import grocerySlice from './grocerySlice'
+import cityListenerSlice from "./CityListenerSlice"
 
 export const store = configureStore({
   reducer: {
-    groceryReducer: grocerySlice
+    groceryReducer: grocerySlice,
+    cityListenerReducer: cityListenerSlice
   },
 })
 

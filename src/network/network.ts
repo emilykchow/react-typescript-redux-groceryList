@@ -65,12 +65,34 @@ export const deleteItem = async (_id: string): Promise<number> => {
 }
 
 
+// Dashboard*********************************************************
+export interface getArtistData {
+    error: Record<string, any>[] | []
+    items?: Record<string, any>[]
+    page?: Record<string, any>[]
+}
 
+const dashboardURL = "https://sandbox.api.soundcharts.com/api/v2/artist"
 
-// // Dashboard*********************************************************
-// const dashboardURL = "https://sandbox.api.soundcharts.com/api/v2/artist"
+export const getArtistUUID = async (name: string): Promise<getArtistData> => {
+    const result = await fetch(`${dashboardURL}/search/${name}?offset=0&limit=20`, {
+        method: 'GET',
+        headers: {
+            'x-app-id': 'soundcharts',
+            'x-api-key': 'soundcharts',
+        }
+    })
+    return result.json()
+}
 
-// export const getArtist UUID = async (): Promise<> => {
-//     const result = await fetch(`{dashboardURL}search/${}`)
-// }
+export const getMonthlyListeners = async (uuid: string): Promise<any> => {
+    const result = await fetch(`${dashboardURL}/${uuid}/streaming/spotify/listeners/2020/10`, {
+        method: 'GET',
+        headers: {
+            'x-app-id': 'soundcharts',
+            'x-api-key': 'soundcharts',
+        }
+    })
+    return result.json()
+}
 

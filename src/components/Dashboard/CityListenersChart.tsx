@@ -1,9 +1,15 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Chart from "react-apexcharts";
+import { getArtistUUID, getMonthlyListeners } from '../../network/network';
+import { getArtistDetails } from '../../redux/CityListenerSlice';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+
 
 
 const CityListenersChart = () => {
-const data ={
+  const dispatch = useAppDispatch()
+  const value = useAppSelector((state: any)  => state.cityListenerReducer.value)
+  const data ={
   options: {
     chart: {
       id: "basic-bar"
@@ -19,6 +25,26 @@ const data ={
     }
   ]
 }
+
+useEffect(() => {
+  if (!Object.keys(value).length) {
+    const result = getArtistUUID('billie eillish')
+    result.then(res => {
+      if (res.items) {
+        dispatch(getArtistDetails(res.items[0]))
+      }
+    })
+  }
+
+  if (value.uuid) {
+    const monthlyListeners = getMonthlyListeners(value.uuid)
+    monthlyListeners.then(res => {
+      console.log(res)
+    })
+  }
+
+}, [dispatch, value.uuid])
+
 
   return (
     <div>
